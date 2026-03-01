@@ -1,0 +1,27 @@
+az network public-ip create \
+  --resource-group lb-rg4 \
+  --name myNewPublicIP \
+  --sku Standard
+  
+  
+  
+ az vm show \
+  --resource-group lb-rg4 \
+  --name vm1 \
+  --query "networkProfile.networkInterfaces[0].id" \
+  --output tsv
+  
+  
+ az network nic ip-config update \
+  --name ipconfig1 \
+  --nic-name vm1863_z1 \
+  --resource-group lb-rg4 \
+  --public-ip-address myNewPublicIP
+  
+  
+az vm show \
+  --resource-group lb-rg4 \
+  --name vm1 \
+  --show-details \
+  --query publicIps \
+  --output tsv
